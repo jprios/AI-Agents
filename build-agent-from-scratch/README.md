@@ -100,34 +100,135 @@ If you want to use OpenAI models:
    cd ai-agent-tools
    ```
 
-2. Install required packages:
+2. Set up a virtual environment:
    ```bash
-   # For Ollama (Local LLM) setup
-   pip install requests termcolor python-dotenv
+   # Create virtual environment
+   python -m venv venv
 
-   # For OpenAI setup (optional)
+   # Activate virtual environment
+   # On Windows:
+   venv\Scripts\activate
+   # On macOS/Linux:
+   source venv/bin/activate
+
+   # Verify activation - should show virtual environment path
+   which python  # on macOS/Linux
+   where python  # on Windows
+   ```
+
+3. Install dependencies:
+   ```bash
+   # Install from requirements.txt
+   pip install -r requirements.txt
+
+   # If you plan to use OpenAI (optional)
    pip install openai
    ```
 
-3. If you prefer using requirements.txt:
+4. Verify installation:
    ```bash
-   # Create requirements.txt
-   cat > requirements.txt << EOL
-   requests>=2.31.0
-   termcolor>=2.3.0
-   python-dotenv>=1.0.0
-   # Optional: for OpenAI integration
-   # openai>=1.3.0
-   EOL
+   # Check installed packages
+   pip list
 
-   # Install from requirements.txt
-   pip install -r requirements.txt
+   # Expected output should show:
+   certifi==2025.1.31
+   charset-normalizer==3.4.1
+   idna==3.10
+   python-dotenv==1.0.1
+   requests==2.32.3
+   termcolor==2.5.0
+   urllib3==2.3.0
    ```
 
 Note: 
-- For Ollama usage, only `requests`, `termcolor`, and `python-dotenv` are required
-- Install `openai` package only if you plan to use OpenAI models
-- Use `pip3` instead of `pip` on some Unix systems if you have both Python 2 and 3 installed
+- Always activate the virtual environment before running the project
+- To deactivate the virtual environment when done:
+  ```bash
+  deactivate
+  ```
+
+## Virtual Environment Management
+
+### Creating a New Environment
+```bash
+# Remove existing environment if needed
+rm -rf venv  # on macOS/Linux
+rmdir /s /q venv  # on Windows
+
+# Create fresh environment
+python -m venv venv
+```
+
+### Common Virtual Environment Commands
+```bash
+# List installed packages
+pip list
+
+# Export requirements
+pip freeze > requirements.txt
+
+# Update pip
+python -m pip install --upgrade pip
+
+# Install specific package version
+pip install package_name==version
+```
+
+## Development Setup (Optional)
+
+1. Manual package installation:
+   ```bash
+   # Core packages
+   pip install python-dotenv==1.0.1
+   pip install requests==2.32.3
+   pip install termcolor==2.5.0
+
+   # Dependencies will be installed automatically:
+   # - certifi
+   # - charset-normalizer
+   # - idna
+   # - urllib3
+   ```
+
+2. Generate requirements.txt:
+   ```bash
+   # Using pip freeze (captures all dependencies)
+   pip freeze > requirements.txt
+
+   # Or using pipreqs (only project imports)
+   pip install pipreqs
+   pipreqs . --force
+   ```
+
+### Troubleshooting Virtual Environment
+
+1. **Environment not activating:**
+   ```bash
+   # Check Python version
+   python --version
+   
+   # Recreate environment with specific Python
+   python3.8 -m venv venv
+   ```
+
+2. **Package installation issues:**
+   ```bash
+   # Upgrade pip
+   python -m pip install --upgrade pip
+   
+   # Install with verbose output
+   pip install -r requirements.txt -v
+   ```
+
+3. **Path issues:**
+   ```bash
+   # Show environment Python
+   which python  # macOS/Linux
+   where python  # Windows
+   
+   # Show installed packages location
+   pip show requests
+   ```
 
 ## Usage
 
